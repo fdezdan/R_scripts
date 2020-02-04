@@ -1,0 +1,7 @@
+
+library(car)
+
+with(Muns700, boxplot (saps~mortdosA))
+
+with(Muns700, leveneTest(saps~mortdosA))
+#No Homogeneity of Variances in this case
