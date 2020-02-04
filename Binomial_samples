@@ -1,0 +1,28 @@
+
+#Vemos el intervalo de confianza al 95% de una binomial con p=0.06
+binom.test(6,100)$conf
+#Aunque para el ejercicio que nos ocupa esperaríamos encontrar 12 casos con n=200
+binom.test(12,200)$conf
+
+#Generamos muestras
+set.seed(80210)
+muestra_binomial_10<-rbinom(10,200,0.06)
+muestra_binomial_10
+
+#Equivalente a programarlo así:
+set.seed(80210)
+replicate(10,rbinom(1,200,0.06))
+
+table(muestra_binomial_10)
+#Vemos el número de casos de cada una de las 10 muestras. Como la muestra es de 200 y p=0.06
+#entonces esperamos encontrar 12 casos de media. Vemos que en nuestra simulación
+#hemos obtenido 3 casos de 15 y 2 de 19, sin embargo sólo 1 de 12. Esto provoca que la
+#media de nuestra simulación sea algo superior a los 12 casos que esperábamos.
+#Así pues hemos obtenido una estimación puntual de: 
+mean(muestra_binomial_10)
+#equivalente a p= 0.0665  < mean(muestra_binomial_10)/2  >
+
+#Aproximamos la binomial a una distribución normal para ver
+#intervalo de confianza [10.4978 16.1022]
+
+t.test(muestra_binomial_10,conf.level=0.95)
